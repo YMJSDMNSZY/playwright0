@@ -27,8 +27,8 @@ class 项目集_类(PageObject):
     def 删除项目集(self,项目集名称):
         while True:
             self.navigate()
-            self.请输入项目集名称.fill(项目集名称)
-            self.page.wait_for_timeout(3_000)
+            # self.请输入项目集名称.fill(项目集名称)
+            self.search(项目集名称,"请输入项目集名称")
             if self.暂无数据.count():
                 break
             else:

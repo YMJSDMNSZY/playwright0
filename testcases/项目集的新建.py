@@ -3,7 +3,6 @@ import pytest
 from testcases import *
 
 
-
 def test_项目集的新建(new_context,删除项目集):
     my_page_测试员=login_and_return_page_with_new_context(new_context,"测试员")
     my_page_测试员.项目集.创建项目集()

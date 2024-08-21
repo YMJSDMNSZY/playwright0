@@ -25,6 +25,16 @@ class PageObject:
         button_loc.click(timeout=timeout)
         # self.page.get_by_role("button").filter(has_text=button_name).click(timeout=timeout)
 
+
+    def search(self,搜索内容:str,placeholder=None):
+        if placeholder:
+            self.page.locator(f"//span[@class='ant-input-affix-wrapper']//input[contains(@placeholder,'{placeholder}')]").fill(搜索内容)
+        else:
+            self.page.locator(".ant-input-affix-wrapper input").fill(搜索内容)
+        self.page.wait_for_load_state("networkidle")
+
+
+
     # @staticmethod
 def login_and_return_page_with_new_context(new_context, 用户别名):
     from module.PageInstance import PageIns as PI
@@ -42,13 +52,13 @@ def login_and_return_page_with_new_context(new_context, 用户别名):
             my_page.我的任务.navigate()
             expect(my_page.登录页.用户名输入框.or_(my_page.登录页.通知铃铛)).to_be_visible()
             if my_page.登录页.用户名输入框.count():
-                my_page.登录页.登录((用户名, 密码))
+                my_page.登录页.登录(用户名,密码)
                 my_page.page.context.storage_state(path=get_path(f".temp/{被测环境}-{用户别名}.json"))
         else:
             context: BrowserContext = new_context()
             page = context.new_page()
             my_page = PI(page)
-            my_page.登录页.登录(用户名, 密码)
+            my_page.登录页.登录(用户名,密码)
             my_page.page.context.storage_state(path=get_path(f".temp/{被测环境}-{用户别名}.json"))
 
     return my_page
