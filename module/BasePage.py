@@ -1,12 +1,4 @@
-import os.path
-
-from filelock import FileLock
-from playwright.sync_api import BrowserContext, Browser
-from utils.GetPath import get_path
-
 from module import *
-
-from utils.globalMap import GlobalMap
 
 
 class PageObject:
@@ -35,30 +27,4 @@ class PageObject:
 
 
 
-    # @staticmethod
-def login_and_return_page_with_new_context(new_context, 用户别名):
-    from module.PageInstance import PageIns as PI
-    from data_module.auth_Data import MyData
-    from utils.GetPath import get_path
-    global_map = GlobalMap()
-    被测环境 = global_map.get("env")
-    用户名 = MyData().userinfo(被测环境, 用户别名)["username"]
-    密码 = MyData().userinfo(被测环境, 用户别名)["password"]
-    with FileLock(get_path(f".temp/{被测环境}-{用户别名}.lock")):
-        if os.path.exists(get_path(f".temp/{被测环境}-{用户别名}.json")):
-            context: BrowserContext = new_context(storage_state=get_path(f".temp/{被测环境}-{用户别名}.json"))
-            page = context.new_page()
-            my_page = PI(page)
-            my_page.我的任务.navigate()
-            expect(my_page.登录页.用户名输入框.or_(my_page.登录页.通知铃铛)).to_be_visible()
-            if my_page.登录页.用户名输入框.count():
-                my_page.登录页.登录(用户名,密码)
-                my_page.page.context.storage_state(path=get_path(f".temp/{被测环境}-{用户别名}.json"))
-        else:
-            context: BrowserContext = new_context()
-            page = context.new_page()
-            my_page = PI(page)
-            my_page.登录页.登录(用户名,密码)
-            my_page.page.context.storage_state(path=get_path(f".temp/{被测环境}-{用户别名}.json"))
 
-    return my_page

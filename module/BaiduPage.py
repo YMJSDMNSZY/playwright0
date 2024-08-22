@@ -1,5 +1,5 @@
 from module import *
-from module.BasePage import PageObject
+
 
 
 class Baidu(PageObject):

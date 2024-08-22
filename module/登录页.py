@@ -1,5 +1,5 @@
 from module import *
-from module.BasePage import PageObject
+
 
 
 class 登录页_类(PageObject):

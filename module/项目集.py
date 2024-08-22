@@ -1,6 +1,6 @@
 from module import *
-from module.BasePage import PageObject
-import time
+
+
 
 class 项目集_类(PageObject):
     def __init__(self, page):

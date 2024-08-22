@@ -1,4 +1,3 @@
-
 from testcases import *
 
 
@@ -10,7 +9,7 @@ from testcases import *
 
 
 def test_new_context(new_context):
-    my_page_测试员=login_and_return_page_with_new_context(new_context,"测试员")
-    my_page_项目经理=login_and_return_page_with_new_context(new_context,"项目经理")
+    my_page_测试员=PageIns.login_and_return_page_with_new_context(new_context,"测试员")
+    my_page_项目经理=PageIns.login_and_return_page_with_new_context(new_context,"项目经理")
     my_page_测试员.page
-    my_page_测试员.登录页.登录()
+    # my_page_测试员.登录页.登录()
