@@ -14,7 +14,7 @@ class 项目集_类(PageObject):
 
     @property
     def 主表格(self):
-        return self.table("项目集名称",表格序号=-1)
+        return self.table("项目集名称")
 
 
     def 创建项目集(self,项目集名称="自动化创建项目集",是否需要纳秒时间戳=True):

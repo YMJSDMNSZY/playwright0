@@ -9,7 +9,7 @@ class PageObject:
     def navigate(self):
         self.page.goto(self.url)
 
-    def table(self,唯一文字,表格序号):
+    def table(self,唯一文字,表格序号=-1):
         return Table(self.page,唯一文字,表格序号)
 
     def click_button(self, button_name, timeout=30_000):
