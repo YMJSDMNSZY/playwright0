@@ -14,7 +14,7 @@ class Table:
     def get_row_locator(self,行定位元素:Locator)->Locator:
         return self.table_div.locator("tr").filter(has=行定位元素)
 
-    def get_cell(self,表头文字or列序号,行元素定位or行序号or行文字)->Locator:
+    def get_cell(self,表头文字or列序号:str|int,行元素定位or行序号or行文字:Locator|int|str)->Locator:
         if isinstance(表头文字or列序号,str):
             列序号 = self.get_header_index(表头文字or列序号)
         else:
