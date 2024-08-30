@@ -45,5 +45,13 @@ class Table:
         row_dict=dict(zip(header_text_list,td_text_list))
         return row_dict
 
+    def get_col_dict(self,表头文字:str)->list:
+        index=self.get_header_index(表头文字)
+        all_tr=self.table_div.locator("tbody").locator("tr").locator("visible=true").all()
+        col_list=[]
+        for tr in all_tr:
+            col_list.append(tr.locator("td").nth(index).all_text_contents())
+        return col_list
+
 
 
