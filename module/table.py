@@ -1,3 +1,5 @@
+import random
+
 from module import *
 
 class Table:
@@ -28,3 +30,20 @@ class Table:
             行定位 =self.table_div.locator("tbody").locator('//tr[not(@aria-hidden="true")]').nth(行元素定位or行序号or行文字)
 
         return 行定位.locator("td").nth(列序号)
+
+    def get_row_dict(self,行元素定位or行序号:Locator|int="random")->dict:
+        if isinstance(行元素定位or行序号,int):
+            tr=self.table_div.locator("tbody").locator("tr").locator("visible=true").nth(行元素定位or行序号)
+        elif isinstance(行元素定位or行序号,Locator):
+            tr=self.table_div.locator("tr").filter(has=行元素定位or行序号)
+        else:
+            all_tr=self.table_div.locator("tbody").locator("tr").locator("visible=true").all()
+            tr=random.choice(all_tr)
+
+        td_text_list=tr.locator("td").all_text_contents()
+        header_text_list=self.table_header_tr.locator("th").all_text_contents()
+        row_dict=dict(zip(header_text_list,td_text_list))
+        return row_dict
+
+
+
