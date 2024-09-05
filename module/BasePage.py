@@ -1,10 +1,12 @@
 from module import *
 from module.table import Table
+from module.locators import Locators
 
 class PageObject:
     def __init__(self, page: Page):
         self.page = page
         self.url = ""
+        self.locators = Locators(self.page)
 
     def navigate(self):
         self.page.goto(self.url)
