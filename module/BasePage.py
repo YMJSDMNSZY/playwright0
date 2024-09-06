@@ -30,6 +30,12 @@ class PageObject:
             self.page.locator(".ant-input-affix-wrapper input").fill(搜索内容)
         self.page.wait_for_load_state("networkidle")
 
-
+    def 表单_文本框填写(self,表单项名称:str,需要填写的文本:str,表单最上层定位:Locator=None, timeout: float = None):
+        if 表单最上层定位:
+            表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称)).locator(
+                "input,textarea").locator("visible=true").last.fill(需要填写的文本, timeout=timeout)
+        else:
+            self.locators.表单项中包含操作元素的最上级div(表单项名称).locator("input,textarea").locator(
+                "visible=true").last.fill(需要填写的文本, timeout=timeout)
 
 
