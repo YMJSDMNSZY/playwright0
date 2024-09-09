@@ -50,3 +50,19 @@ class PageObject:
                 self.locators.表单项中包含操作元素的最上级div(表单项名称).locator('//input[@type="search"]').fill(需要选择的项, timeout=timeout)
             self.page.locator(".ant-select-dropdown").locator("visible=true").get_by_text(需要选择的项).click(timeout=timeout)
         expect(self.page.locator(".ant-select-dropdown")).to_be_hidden(timeout=timeout)
+
+    def 表单_radio选择(self, 表单项名称: str, 需要选择的项: str, 表单最上层定位: Locator = None, timeout: float = None):
+        if 表单最上层定位:
+            表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称)).locator("label").locator("visible=true").filter(has_text=需要选择的项).locator("input").check(timeout=timeout)
+        else:
+            self.locators.表单项中包含操作元素的最上级div(表单项名称).locator("label").locator("visible=true").filter(has_text=需要选择的项).locator("input").check(timeout=timeout)
+
+    def 表单_switch开关(self, 表单项名称: str, 开关状态: str, 表单最上层定位: Locator = None, timeout: float = None):
+        if "开" in 开关状态 or "是" in 开关状态:
+            开关状态bool = True
+        else:
+            开关状态bool = False
+        if 表单最上层定位:
+            表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称)).get_by_role("switch").set_checked(开关状态bool, timeout=timeout)
+        else:
+            self.locators.表单项中包含操作元素的最上级div(表单项名称).get_by_role("switch").set_checked(开关状态bool, timeout=timeout)

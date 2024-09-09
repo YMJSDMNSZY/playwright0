@@ -21,6 +21,10 @@ def test_new_context(new_context):
 
     # my_page_测试员.项目集.表单_下拉框选择("父项目集", "公共项目集")
 
+    #my_page_测试员.项目集.表单_radio选择("权限类型","企业内公开")
+
+    my_page_测试员.项目集.表单_switch开关("自动生成README文件", "是")
+
 
 
 
