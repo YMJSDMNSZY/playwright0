@@ -83,3 +83,21 @@ class PageObject:
             日期控件定位.locator("input").nth(index).click(timeout=timeout)
             日期控件定位.locator("input").nth(index).fill(格式化后的日期, timeout=timeout)
             日期控件定位.locator("input").nth(index).blur(timeout=timeout)
+
+    def 快捷操作_填写表单(self, 表单最上层定位: Locator = None, timeout=None, **kwargs):
+        for 表单项, 内容 in kwargs.items():
+            if not 内容:
+                continue
+            elif self.locators.表单项中包含操作元素的最上级div(表单项).locator(".ant-input").count():
+                self.表单_文本框填写(表单项名称=表单项, 需要填写的文本=内容, 表单最上层定位=表单最上层定位, timeout=timeout)
+            elif self.locators.表单项中包含操作元素的最上级div(表单项).locator(".ant-select-selector").count():
+                self.表单_下拉框选择(表单项名称=表单项, 需要选择的项=内容, 表单最上层定位=表单最上层定位, timeout=timeout)
+            elif self.locators.表单项中包含操作元素的最上级div(表单项).locator(".ant-radio-group").count():
+                self.表单_radio选择(表单项名称=表单项, 需要选择的项=内容, 表单最上层定位=表单最上层定位, timeout=timeout)
+            elif self.locators.表单项中包含操作元素的最上级div(表单项).get_by_role("switch").count():
+                self.表单_switch开关(表单项名称=表单项, 开关状态=内容, 表单最上层定位=表单最上层定位, timeout=timeout)
+            elif self.locators.表单项中包含操作元素的最上级div(表单项).locator(".ant-picker").count():
+                self.表单_日期(表单项名称=表单项, 日期=内容, 表单最上层定位=表单最上层定位, timeout=timeout)
+            else:
+                pytest.fail(f"不支持的快捷表单填写:\n{表单项}:{内容}")
+
