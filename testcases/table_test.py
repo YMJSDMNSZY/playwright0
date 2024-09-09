@@ -23,6 +23,9 @@ def test_new_context(new_context):
 
     #my_page_测试员.项目集.表单_radio选择("权限类型","企业内公开")
 
+    my_page_测试员.项目集.表单_日期("项目集周期", "2024-07-28,29")
+    my_page_测试员.项目集.表单_日期("项目集周期", "0,365")
+
     my_page_测试员.项目集.表单_switch开关("自动生成README文件", "是")
 
 

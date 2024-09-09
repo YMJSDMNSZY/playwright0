@@ -1,6 +1,7 @@
 from module import *
 from module.table import Table
 from module.locators import Locators
+from utils.my_date import *
 
 class PageObject:
     def __init__(self, page: Page):
@@ -66,3 +67,19 @@ class PageObject:
             表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称)).get_by_role("switch").set_checked(开关状态bool, timeout=timeout)
         else:
             self.locators.表单项中包含操作元素的最上级div(表单项名称).get_by_role("switch").set_checked(开关状态bool, timeout=timeout)
+
+    def 表单_日期(self, 表单项名称: str, 日期: str, 表单最上层定位: Locator = None, timeout: float = None):
+        if 表单最上层定位:
+            日期控件定位 = 表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称))
+        else:
+            日期控件定位 = self.locators.表单项中包含操作元素的最上级div(表单项名称)
+        日期列表 = 日期.split(",")
+        for index, 单日期 in enumerate(日期列表):
+            try:
+                int(单日期)
+                格式化后的日期 = 返回当前时间xxxx_xx_xx加N天(int(单日期))
+            except:
+                格式化后的日期 = 单日期
+            日期控件定位.locator("input").nth(index).click(timeout=timeout)
+            日期控件定位.locator("input").nth(index).fill(格式化后的日期, timeout=timeout)
+            日期控件定位.locator("input").nth(index).blur(timeout=timeout)
