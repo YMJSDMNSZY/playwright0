@@ -1,6 +1,6 @@
 from testcases import *
 
-def test_new_context(new_context):
+def test_标单测试_自动填写表单(new_context):
     my_page_测试员=PageIns.login_and_return_page_with_new_context(new_context,"测试员")
     my_page_测试员.项目集.navigate()
     my_page_测试员.项目集.click_button("新建")
