@@ -1,0 +1,1 @@
+{"name": "项目集的新建", "status": "skipped", "description": "\n1. 项目集的新建\n2. 删除项目集\n创建人: Carlymilo\n", "parameters": [{"name": "browser_name", "value": "'chromium'"}], "start": 1726104935530, "stop": 1726104935530, "uuid": "cd395eb6-de74-4018-aa2e-12f7e115be05", "testCaseId": "f2dfa25fb87d58d004c74758e8da7e11", "fullName": "testcases.项目集的新建#test_项目集的新建"}

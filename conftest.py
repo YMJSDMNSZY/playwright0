@@ -1,5 +1,6 @@
 import re
 
+import allure
 import pytest
 from pytest_playwright.pytest_playwright import CreateContextCallback, ArtifactsRecorder
 from playwright.sync_api import Page, expect, BrowserContext, Browser
@@ -89,6 +90,22 @@ def ui_timeout(pytestconfig):
     timeout=float(pytestconfig.getoption("--ui_timeout"))
     expect.set_options(timeout=timeout)
     return timeout
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item):
+    outcome = yield
+    report = outcome.get_result()
+    if report.failed:
+        try:
+            for context in item.funcargs['browser'].contexts:
+                for page in context.pages:
+                    if page.is_closed():
+                        continue
+                    bytes_png = page.screenshot(timeout=5000, full_page=True)
+                    allure.attach(bytes_png, f"失败截图---{page.title()}")
+        except:
+            ...
 
 
 @pytest.fixture
