@@ -117,12 +117,13 @@ def pytest_addoption(parser: Any) -> None:
         default=30_000,
         help="locator timeout and expect timeout",
     )
-    # group.addoption(
-    #     "--headed",
-    #     action="store_true",
-    #     default=False,
-    #     help="Run tests in headed mode.",
-    # )
+    group.addoption(
+        "--rerun_strategy",
+        action="store",
+        default=None,
+        #  这里不使用nargs="*"是因为无限个args对参数的位置有要求,或者测试目标需要用参数指定
+        help="testcase rerun strategy set, eg: screenshot=retain-on-failure,video=retain-on-failure,tracing=retain-on-failure",
+    )
 
 @pytest.fixture(scope="session")
 def ui_timeout(pytestconfig):
